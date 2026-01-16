@@ -1,15 +1,25 @@
 // Firebase Configuration
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_AUTH_DOMAIN",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_STORAGE_BUCKET",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyCqRAq6NT9fYOJNPNybxW0oeZC9OE4Q1wA",
+  authDomain: "esportapp-a0083.firebaseapp.com",
+  projectId: "esportapp-a0083",
+  storageBucket: "esportapp-a0083.firebasestorage.app",
+  messagingSenderId: "723201122529",
+  appId: "1:723201122529:web:a9a12fa0a5ec345ca357a0",
+  measurementId: "G-PNK54SQFR0"
 };
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 
 // Initialize services
 const db = firebase.firestore();
@@ -231,3 +241,4 @@ service cloud.firestore {
     }
   }
 }
+
