@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#1a1a2e">
+    <title>TourneyPro - Gaming Tournaments</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="icon-192.png">
+    <link rel="apple-touch-icon" href="icon-512.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading" class="loading-screen">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <h2>TourneyPro</h2>
+            <p>Loading your gaming experience...</p>
+        </div>
+    </div>
+
+    <!-- App Container -->
+    <div id="app" class="app-container" style="display: none;">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-left">
+                <button class="menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="logo">
+                    <i class="fas fa-trophy"></i>
+                    <span>TourneyPro</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="balance" id="balanceDisplay">
+                    <i class="fas fa-coins"></i>
+                    <span>1,550</span> COINS
+                </div>
+                <div class="notifications">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge">3</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Sidebar Menu -->
+        <div class="sidebar-overlay"></div>
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="user-profile">
+                    <div class="avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-info">
+                        <h4 id="userName">Player_Alpha</h4>
+                        <p id="userId">ID: 12345678</p>
+                    </div>
+                </div>
+                <button class="close-sidebar">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <nav class="sidebar-menu">
+                <a href="#home" class="menu-item active">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="#tournaments" class="menu-item">
+                    <i class="fas fa-trophy"></i>
+                    <span>Tournaments</span>
+                    <span class="menu-badge">5</span>
+                </a>
+                <a href="#live-matches" class="menu-item">
+                    <i class="fas fa-broadcast-tower"></i>
+                    <span>Live Matches</span>
+                    <span class="menu-badge live">LIVE</span>
+                </a>
+                <a href="#match-history" class="menu-item">
+                    <i class="fas fa-history"></i>
+                    <span>Match History</span>
+                </a>
+                <a href="#leaderboard" class="menu-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Leaderboard</span>
+                </a>
+                <a href="#wallet" class="menu-item">
+                    <i class="fas fa-wallet"></i>
+                    <span>Wallet</span>
+                </a>
+                <a href="#friends" class="menu-item">
+                    <i class="fas fa-users"></i>
+                    <span>Friends</span>
+                    <span class="menu-badge">12</span>
+                </a>
+                <a href="#settings" class="menu-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <button id="logoutBtn" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="app-content">
+            <!-- Dynamic content will be loaded here -->
+            <div id="content"></div>
+        </main>
+
+        <!-- Bottom Navigation (for mobile) -->
+        <nav class="bottom-nav">
+            <a href="#home" class="nav-item active">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="#tournaments" class="nav-item">
+                <i class="fas fa-trophy"></i>
+                <span>Tournaments</span>
+            </a>
+            <a href="#live-matches" class="nav-item">
+                <i class="fas fa-play-circle"></i>
+                <span>Live</span>
+            </a>
+            <a href="#wallet" class="nav-item">
+                <i class="fas fa-wallet"></i>
+                <span>Wallet</span>
+            </a>
+            <a href="#profile" class="nav-item" id="profileNav">
+                <i class="fas fa-user"></i>
+                <span>Profile</span>
+            </a>
+        </nav>
+    </div>
+
+    <!-- Install App Prompt -->
+    <div id="installPrompt" class="install-prompt">
+        <div class="prompt-content">
+            <i class="fas fa-mobile-alt"></i>
+            <div class="prompt-text">
+                <h4>Install TourneyPro App</h4>
+                <p>For better experience, install app on your device</p>
+            </div>
+            <button id="installBtn" class="install-btn">Install</button>
+            <button id="closePrompt" class="close-prompt">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <script src="firebase.js"></script>
+    <script src="app.js"></script>
+    
+    <!-- Register Service Worker -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service-worker.js')
+                    .then(registration => {
+                        console.log('ServiceWorker registered');
+                    })
+                    .catch(err => {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>

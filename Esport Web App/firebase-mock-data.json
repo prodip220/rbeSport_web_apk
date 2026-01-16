@@ -1,0 +1,55 @@
+{
+  "users": {
+    "12345678": {
+      "name": "Player_Alpha",
+      "email": "player@example.com",
+      "balance": 1550,
+      "totalEarnings": 12500,
+      "joinedAt": "2024-01-01T00:00:00Z",
+      "level": 15,
+      "matchesPlayed": 42,
+      "matchesWon": 18,
+      "totalKills": 245
+    }
+  },
+  "tournaments": [
+    {
+      "id": "tournament_001",
+      "name": "DAILY SCRIMS: PURGATORY CUP",
+      "type": "daily",
+      "entryFee": 50,
+      "prizePool": 2000,
+      "perKillPrize": 15,
+      "maxPlayers": 48,
+      "currentPlayers": 32,
+      "status": "upcoming",
+      "startTime": "2024-01-15T20:00:00Z",
+      "roomId": "FG45SD",
+      "password": "tourney123"
+    },
+    {
+      "id": "tournament_002",
+      "name": "WEEKEND RU: KALAAHI CHA",
+      "type": "weekend",
+      "entryFee": 100,
+      "prizePool": 5000,
+      "perKillPrize": 25,
+      "maxPlayers": 100,
+      "currentPlayers": 78,
+      "status": "upcoming",
+      "startTime": "2024-01-20T18:00:00Z"
+    }
+  ],
+  "live_matches": [
+    {
+      "id": "match_001",
+      "tournamentId": "tournament_001",
+      "roomId": "FG45SD",
+      "password": "tourney123",
+      "players": ["Player_Alpha", "Player_Beta", "Player_Rata"],
+      "status": "active",
+      "startedAt": "2024-01-15T19:30:00Z",
+      "timeRemaining": "00:09:45"
+    }
+  ]
+}
